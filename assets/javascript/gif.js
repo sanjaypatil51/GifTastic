@@ -4,9 +4,35 @@ function renderButtons() {
 
     // YOUR CODE GOES HERE
     $("#buttons-view").empty();
+    var buttonColor=1
     for (i = 0; i < items.length; i++) {
         var newDiv = $("<button>")
-        newDiv.attr({ "class": "item-button btn btn-info", "data-name": items[i] })
+        if (buttonColor==1){
+            newDiv.attr({ "class": "item-button btn btn-primary", "data-name": items[i] })
+            buttonColor++
+        }
+        else if (buttonColor==2){
+            newDiv.attr({ "class": "item-button btn btn-success", "data-name": items[i] })
+            buttonColor++
+        }
+        else if (buttonColor==3){
+            newDiv.attr({ "class": "item-button btn btn-danger", "data-name": items[i] })
+            buttonColor++
+        }
+        else if (buttonColor==4){
+            newDiv.attr({ "class": "item-button btn btn-warning", "data-name": items[i] })
+            buttonColor++
+        }
+        else if (buttonColor==5){
+            newDiv.attr({ "class": "item-button btn btn-primary", "data-name": items[i] })
+            buttonColor++
+        }
+        else if (buttonColor==6){
+            newDiv.attr({ "class": "item-button btn btn-dark", "data-name": items[i] })
+            buttonColor=1
+        }
+
+        //newDiv.attr({ "class": "item-button btn btn-info", "data-name": items[i] })
         //newDiv.attr("type","submit")
         newDiv.text(items[i])
         $("#buttons-view").append(newDiv)
