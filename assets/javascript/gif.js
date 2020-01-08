@@ -4,32 +4,32 @@ function renderButtons() {
 
     // YOUR CODE GOES HERE
     $("#buttons-view").empty();
-    var buttonColor=1
+    var buttonColor = 1
     for (i = 0; i < items.length; i++) {
         var newDiv = $("<button>")
-        if (buttonColor==1){
+        if (buttonColor == 1) {
             newDiv.attr({ "class": "item-button btn btn-primary", "data-name": items[i] })
             buttonColor++
         }
-        else if (buttonColor==2){
+        else if (buttonColor == 2) {
             newDiv.attr({ "class": "item-button btn btn-success", "data-name": items[i] })
             buttonColor++
         }
-        else if (buttonColor==3){
+        else if (buttonColor == 3) {
             newDiv.attr({ "class": "item-button btn btn-danger", "data-name": items[i] })
             buttonColor++
         }
-        else if (buttonColor==4){
+        else if (buttonColor == 4) {
             newDiv.attr({ "class": "item-button btn btn-warning", "data-name": items[i] })
             buttonColor++
         }
-        else if (buttonColor==5){
+        else if (buttonColor == 5) {
             newDiv.attr({ "class": "item-button btn btn-primary", "data-name": items[i] })
             buttonColor++
         }
-        else if (buttonColor==6){
+        else if (buttonColor == 6) {
             newDiv.attr({ "class": "item-button btn btn-dark", "data-name": items[i] })
-            buttonColor=1
+            buttonColor = 1
         }
 
         //newDiv.attr({ "class": "item-button btn btn-info", "data-name": items[i] })
@@ -78,7 +78,10 @@ $("#buttons-view").on("click", ".btn", function () {
                 var p = $("<p>").text("Rating: " + rating);
 
                 var itemImage = $("<img>");
-                itemImage.attr({ "src": results[i].images.fixed_height.url, "class": "img-fluid" });
+                itemImage.attr({
+                    "src": results[i].images.fixed_height.url, "class": "img-fluid gif", "data-still": results[i].images.fixed_height_still.url,
+                    "data-animate": results[i].images.fixed_height.url, "data-state": "animate"
+                });
 
                 gifDiv.prepend(p);
                 gifDiv.prepend(itemImage);
@@ -97,7 +100,10 @@ $("#buttons-view").on("click", ".btn", function () {
                 var p = $("<p>").text("Rating: " + rating);
 
                 var itemImage = $("<img>");
-                itemImage.attr({ "src": results[i].images.fixed_height.url, "class": "img-fluid" });
+                itemImage.attr({
+                    "src": results[i].images.fixed_height.url, "class": "img-fluid gif", "data-still": results[i].images.fixed_height_still.url,
+                    "data-animate": results[i].images.fixed_height.url, "data-state": "animate"
+                });
 
                 gifDiv.prepend(p);
                 gifDiv.prepend(itemImage);
@@ -106,6 +112,19 @@ $("#buttons-view").on("click", ".btn", function () {
                 $("#gifs-appear-here").prepend(newDiv);
             }
         });
+})
+
+$("#gifs-appear-here").on("click", ".gif", function () {
+    if ($(this).attr("data-state") == "still") {
+        console.log($(this).attr("data-state"))
+        $(this).attr("src", $(this).attr("data-animate"))
+        $(this).attr("data-state", "animate")
+    }
+    else if ($(this).attr("data-state") == "animate") {
+        console.log($(this).attr("data-state"))
+        $(this).attr("src", $(this).attr("data-still"))
+        $(this).attr("data-state", "still")
+    }
 })
 
 renderButtons()
